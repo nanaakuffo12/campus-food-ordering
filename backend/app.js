@@ -1,5 +1,4 @@
 const express = require('express');
-const { json, urlencoded } = require('body-parser');
 const { authRoutes } = require('./routes/auth');
 const { usersRoutes } = require('./routes/users');
 const { menuRoutes } = require('./routes/menu');
@@ -22,9 +21,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware
-app.use(json());
-app.use(urlencoded({ extended: true }));
+// Built-in Express body parsing (replaces deprecated body-parser)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes());

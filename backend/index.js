@@ -1,33 +1,22 @@
 const express = require('express');
-const { createConnection } = require('typeorm');
 const config = require('./config');
 const app = require('./app');
 
 const PORT = config.port;
 
-const startServer = async () => {
+const startServer = () => {
     try {
-        // Initialize TypeORM database connection
-        await createConnection({
-            type: 'postgres',
-            host: config.db.host,
-            port: config.db.port,
-            username: config.db.username,
-            password: config.db.password,
-            database: config.db.database,
-            synchronize: config.db.synchronize,
-            logging: config.db.logging,
-            ssl: config.db.ssl,
-            entities: ['./models/**/*.js'],
-        });
-        console.log('Database connected successfully');
-
+        // Start server without database (using in-memory storage)
+        // For production, implement actual database integration
+        console.log('📊 Using in-memory database (development mode)');
+        
         app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-            console.log(`Environment: ${config.nodeEnv}`);
+            console.log(`🚀 Server is running on port ${PORT}`);
+            console.log(`📝 Environment: ${config.nodeEnv}`);
+            console.log(`🔗 API available at http://localhost:${PORT}/api`);
         });
     } catch (error) {
-        console.error('Error connecting to the database', error);
+        console.error('❌ Error starting server', error);
         process.exit(1);
     }
 };
