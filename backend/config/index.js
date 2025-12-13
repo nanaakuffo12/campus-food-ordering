@@ -17,8 +17,8 @@ const config = {
     secret: process.env.JWT_SECRET || 'your_jwt_secret',
     expiresIn: process.env.JWT_EXPIRES_IN || '1h',
   },
-  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  apiUrl: process.env.API_URL || 'http://localhost:3000/api',
+  corsOrigin: process.env.CORS_ORIGIN || 'https://nanaakuffo12.github.io',
+  apiUrl: process.env.API_URL || 'https://campus-food-ordering.onrender.com/api',
 };
 
 module.exports = config;
