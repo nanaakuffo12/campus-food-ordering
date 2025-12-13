@@ -288,10 +288,11 @@ function loadCart() {
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <h4 style="margin: 0;">${item.name}</h4>
-                        <p style="margin: 5px 0; color: #666;">${formatCurrency(item.price)} × ${item.quantity} = ${formatCurrency(itemTotal)}</p>
+                        <p style="margin: 5px 0; color: #666;">Price: ${formatCurrency(item.price)}</p>
+                        <p style="margin: 5px 0; color: #666;">Qty: <input type="number" id="qty-${index}" min="1" value="${item.quantity}" onchange="updateCartQty(${index}, this.value)" style="width: 60px; padding: 5px;"></p>
+                        <p style="margin: 5px 0; color: #4CAF50; font-weight: bold;">Subtotal: <span id="subtotal-${index}">${formatCurrency(itemTotal)}</span></p>
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <input type="number" min="1" value="${item.quantity}" onchange="updateCartQty(${index}, this.value)" style="width: 60px; padding: 5px;">
                         <button onclick="removeFromCart(${index})" style="background: #f44336; color: white; padding: 5px 10px; border: none; cursor: pointer; border-radius: 3px;">Remove</button>
                     </div>
                 </div>
@@ -301,7 +302,7 @@ function loadCart() {
 
     cartContainer.innerHTML += `
         <div style="margin-top: 20px; border-top: 2px solid #333; padding-top: 15px;">
-            <h3>Total: ${formatCurrency(totalPrice)}</h3>
+            <h3>Total: <span id="cart-total-display">${formatCurrency(totalPrice)}</span></h3>
         </div>
     `;
     
@@ -310,14 +311,33 @@ function loadCart() {
 
 function updateCartQty(index, qty) {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    if (qty <= 0) {
+    const newQty = parseInt(qty);
+    
+    if (newQty <= 0) {
         cart.splice(index, 1);
     } else {
-        cart[index].quantity = parseInt(qty);
+        cart[index].quantity = newQty;
     }
+    
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
-    loadCart();
+    
+    if (newQty > 0) {
+        const item = cart[index];
+        const subtotal = item.price * item.quantity;
+        const subtotalSpan = document.getElementById(`subtotal-${index}`);
+        if (subtotalSpan) {
+            subtotalSpan.textContent = formatCurrency(subtotal);
+        }
+        
+        const cartTotalDisplay = document.getElementById('cart-total-display');
+        if (cartTotalDisplay) {
+            const newTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalDisplay.textContent = formatCurrency(newTotal);
+        }
+    } else {
+        loadCart();
+    }
 }
 
 function removeFromCart(index) {
