@@ -1,10 +1,10 @@
 const express = require('express');
 const { json, urlencoded } = require('body-parser');
-const { authRoutes } = require('./routes/auth.routes');
-const { usersRoutes } = require('./routes/users.routes');
-const { menuRoutes } = require('./routes/menu.routes');
-const { ordersRoutes } = require('./routes/orders.routes');
-const { errorHandler } = require('./middleware/error.middleware');
+const { authRoutes } = require('./routes/auth');
+const { usersRoutes } = require('./routes/users');
+const { menuRoutes } = require('./routes/menu');
+const { ordersRoutes } = require('./routes/orders');
+const { errorHandler } = require('./middleware/error');
 
 const app = express();
 
