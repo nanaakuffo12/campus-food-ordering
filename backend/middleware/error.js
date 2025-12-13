@@ -1,4 +1,3 @@
-// Error Handling Middleware
 const errorHandler = (err, req, res, next) => {
     console.error('Error:', err);
     

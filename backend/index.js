@@ -6,8 +6,6 @@ const PORT = config.port;
 
 const startServer = () => {
     try {
-        // Start server without database (using in-memory storage)
-        // For production, implement actual database integration
         console.log('📊 Using in-memory database (development mode)');
         
         app.listen(PORT, () => {

@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const { authMiddleware } = require('../middleware/auth');
 const config = require('../config');
 
-// In-memory database (replace with real DB in production)
 let users = [
     {
         id: 1,
@@ -29,7 +28,6 @@ let nextUserId = 3;
 const authRoutes = () => {
     const router = express.Router();
     
-    // Login route
     router.post('/login', (req, res) => {
         try {
             const { email, password } = req.body;
@@ -70,7 +68,6 @@ const authRoutes = () => {
         }
     });
     
-    // Signup route
     router.post('/signup', (req, res) => {
         try {
             const { name, email, password, roomNumber } = req.body;
@@ -120,7 +117,6 @@ const authRoutes = () => {
         }
     });
     
-    // Logout route
     router.post('/logout', authMiddleware, (req, res) => {
         res.json({ message: 'Logout successful' });
     });
