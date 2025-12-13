@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Food Ordering System</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header style="display:flex; align-items:center; justify-content:space-between; padding: 15px 20px;">
+        <div id="brand" style="display:flex; flex-direction:column;">
+            <h1 id="top" style="margin: 0; font-size: 24px;">Online</h1>
+            <h1 id="top1" style="margin: 0; font-size: 24px;">FoodShop</h1>
+        </div>
+
+        <div id="cart-summary" style="display:flex; align-items:center; gap: 10px;">
+            <span>Cart: </span>
+            <span id="cart-count">0</span>
+            <span> item(s) - </span>
+            <span id="cart-total">₵0.00</span>
+            <button class="btn" onclick="switchPage('cart')" style="margin-left: 10px;">View Cart</button>
+            <button class="btn" id="login-btn" style="margin-left: 10px;" onclick="handleAuthClick()">Login</button>
+        </div>
+    </header>
+    <hr>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <ul id="navcontent" style="list-style: none; display: flex; gap: 20px; padding: 0 20px; margin: 0;">
+            <li><a href="#" onclick="switchPage('home'); return false;" style="text-decoration: none; color: blue;">Home</a></li>
+            <li><a href="#" onclick="switchPage('about'); return false;" style="text-decoration: none; color: blue;">About</a></li>
+            <li><a href="#" onclick="switchPage('menu'); return false;" style="text-decoration: none; color: blue;">Menu</a></li>
+            <li><a href="#" onclick="switchPage('contact'); return false;" style="text-decoration: none; color: blue;">Contact</a></li>
+            <li id="profile-nav" style="display: none;"><a href="#" onclick="switchPage('profile'); return false;" style="text-decoration: none; color: blue;">Profile</a></li>
+            <li id="orders-nav" style="display: none;"><a href="#" onclick="switchPage('orders'); return false;" style="text-decoration: none; color: blue;">My Orders</a></li>
+            <li id="logout-nav" style="display: none;"><button class="btn" onclick="handleLogout()" style="background: #f44336; color: white; border: none; padding: 8px 16px; cursor: pointer;">Logout</button></li>
+        </ul>
+    </nav>
+    <hr>
+
+    <!-- Main Content Area -->
+    <div id="app" style="max-width: 1200px; margin: 20px auto; padding: 20px;">
+
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page" style="display: block;">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h1>Welcome to Online FoodShop</h1>
+                <p style="font-size: 18px; color: #666;">Order delicious meals from your favorite campus cafeteria</p>
+                <button class="btn" onclick="switchPage('menu')" style="background: #4CAF50; color: white; padding: 15px 30px; font-size: 16px; cursor: pointer; border: none; border-radius: 4px; margin-top: 20px;">ORDER NOW</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;">
+                <div style="text-align: center;">
+                    <h3>🚀 Fast Delivery</h3>
+                    <p>Get your food delivered to your doorstep quickly</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3>🍽️ Wide Selection</h3>
+                    <p>Choose from a variety of delicious meals</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3>💰 Affordable Prices</h3>
+                    <p>Best prices on campus</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3>✅ Easy Ordering</h3>
+                    <p>Simple and quick checkout process</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU PAGE -->
+        <div id="page-menu" class="page" style="display: none;">
+            <h1>Our Menu</h1>
+            <div id="menu-items" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <!-- Menu items loaded here -->
+            </div>
+        </div>
+
+        <!-- CART PAGE -->
+        <div id="page-cart" class="page" style="display: none;">
+            <h1>Your Shopping Cart</h1>
+            <div id="cart-items" style="margin-top: 20px;">
+                <!-- Cart items loaded here -->
+            </div>
+            <div style="margin-top: 30px; display: none;" id="checkout-section">
+                <button class="btn" onclick="switchPage('checkout')" style="background: #4CAF50; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px;">Proceed to Checkout</button>
+                <button class="btn" onclick="switchPage('menu')" style="background: #2196F3; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px; margin-left: 10px;">Continue Shopping</button>
+            </div>
+        </div>
+
+        <!-- CHECKOUT PAGE -->
+        <div id="page-checkout" class="page" style="display: none;">
+            <h1>Checkout</h1>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+                <div>
+                    <h2>Order Summary</h2>
+                    <div id="checkout-items" style="border: 1px solid #ddd; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                        <!-- Order items -->
+                    </div>
+                    <div style="border-top: 2px solid #333; padding-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span><strong>Total:</strong></span>
+                            <span id="checkout-total" style="font-size: 18px; font-weight: bold;">₵0.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Delivery Information</h2>
+                    <div style="padding: 15px;">
+                        <p style="padding: 10px 0; border-bottom: 1px solid #ddd;"><strong>Delivery will be made to your specified location</strong></p>
+                        <p style="padding: 10px 0;">Please ensure your contact details are correct in your profile.</p>
+                        <button class="btn" id="place-order-btn" onclick="placeOrder()" style="background: #4CAF50; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px; width: 100%; margin-top: 20px;">Place Order</button>
+                        <button class="btn" onclick="switchPage('cart')" style="background: #999; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px; width: 100%; margin-top: 10px;">Back to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDERS PAGE -->
+        <div id="page-orders" class="page" style="display: none;">
+            <h1>My Orders</h1>
+            <div id="orders-container" style="margin-top: 20px;">
+                <!-- Orders loaded here -->
+            </div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div id="page-profile" class="page" style="display: none;">
+            <h1>My Profile</h1>
+            <div id="profile-container" style="margin-top: 20px;">
+                <!-- Profile loaded here -->
+            </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="page-about" class="page" style="display: none;">
+            <h1>About Online FoodShop</h1>
+            <div style="margin-top: 20px; max-width: 800px;">
+                <h2>Our Story</h2>
+                <p>Welcome to Online FoodShop! We are passionate about delivering delicious, high-quality food right to your doorstep. Since our founding, we've been committed to providing fresh ingredients and exceptional service.</p>
+
+                <h2 style="margin-top: 30px;">Our Mission</h2>
+                <p>Our mission is to make great food accessible to everyone. We believe that everyone deserves a delicious meal, whether you're ordering for yourself or your family.</p>
+
+                <h2 style="margin-top: 30px;">Why Choose Us?</h2>
+                <ul style="line-height: 1.8;">
+                    <li>Fresh ingredients sourced daily</li>
+                    <li>Fast and reliable delivery</li>
+                    <li>Wide variety of menu options</li>
+                    <li>Competitive prices</li>
+                    <li>Excellent customer service</li>
+                </ul>
+
+                <h2 style="margin-top: 30px;">Contact Information</h2>
+                <p>Have questions? Feel free to <a href="#" onclick="switchPage('contact'); return false;">contact us</a> anytime. We're here to help!</p>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="page-contact" class="page" style="display: none;">
+            <h1>Contact Us</h1>
+            <div style="max-width: 600px; margin-top: 20px;">
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" style="border: 1px solid #ddd; padding: 20px; border-radius: 4px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Name</strong></label>
+                        <input type="text" name="name" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Email</strong></label>
+                        <input type="email" name="email" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Phone</strong></label>
+                        <input type="tel" name="phone" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Query Type</strong></label>
+                        <select name="queryType" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                            <option>Select</option>
+                            <option>Order related Issues</option>
+                            <option>Complaint</option>
+                            <option>Feedback</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Message</strong></label>
+                        <textarea name="message" rows="5" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px;">Submit</button>
+                    <button type="reset" class="btn" style="background: #999; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; margin-left: 10px;">Reset</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- LOGIN PAGE -->
+        <div id="page-login" class="page" style="display: none;">
+            <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
+                <h1>Login</h1>
+                <form id="login-form" onsubmit="handleLogin(event)" style="margin-top: 20px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Email</strong></label>
+                        <input type="email" id="login-email" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Password</strong></label>
+                        <input type="password" id="login-password" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <button type="submit" class="btn" style="background: #2196F3; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; width: 100%; font-size: 16px;">Login</button>
+                </form>
+                <p style="margin-top: 20px; text-align: center;">Don't have an account? <a href="#" onclick="switchPage('signup'); return false;" style="color: blue;">Sign up here</a></p>
+            </div>
+        </div>
+
+        <!-- SIGNUP PAGE -->
+        <div id="page-signup" class="page" style="display: none;">
+            <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
+                <h1>Sign Up</h1>
+                <form id="signup-form" onsubmit="handleSignup(event)" style="margin-top: 20px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Email</strong></label>
+                        <input type="email" id="signup-email" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Password (min 6 characters)</strong></label>
+                        <input type="password" id="signup-password" required minlength="6" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;"><strong>Confirm Password</strong></label>
+                        <input type="password" id="signup-password-confirm" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <button type="submit" class="btn" style="background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; width: 100%; font-size: 16px;">Sign Up</button>
+                </form>
+                <p style="margin-top: 20px; text-align: center;">Already have an account? <a href="#" onclick="switchPage('login'); return false;" style="color: blue;">Login here</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 50px; padding: 20px; text-align: center; border-top: 1px solid #ddd;">
+        <p>Copyright © 2020-2025 OnlineFoodShop. All Rights are reserved</p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>

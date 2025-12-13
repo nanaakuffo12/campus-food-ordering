@@ -1,0 +1,31 @@
+{
+  "name": "campus-food-ordering-backend",
+  "version": "1.0.0",
+  "description": "A campus food ordering system with user registration, authentication, menu display, ordering, and order tracking.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "typeorm": "^0.2.41",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "keywords": [
+    "food",
+    "ordering",
+    "campus",
+    "express",
+    "node.js"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
