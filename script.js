@@ -76,6 +76,8 @@ async function handleLogin(event) {
         const data = await response.json();
         if (data.success || response.ok) {
             localStorage.setItem('authToken', data.token || data.data?.token);
+            const decodedUser = decodeToken(data.token || data.data?.token);
+            console.log('Logged in user:', decodedUser);
             showNotification('Login successful!', 'success');
             updateAuthUI();
             switchPage('home');
@@ -143,6 +145,7 @@ function updateAuthUI() {
     if (isAuthenticated()) {
         const token = getToken();
         const user = decodeToken(token);
+        console.log('updateAuthUI - user:', user);
         
         loginBtn.textContent = `${user?.email || 'User'} (Logout)`;
         loginBtn.style.background = '#f44336';
@@ -151,8 +154,10 @@ function updateAuthUI() {
         ordersNav.style.display = 'block';
         
         if (user?.role === 'admin') {
+            console.log('User is admin, showing admin nav');
             adminNav.style.display = 'block';
         } else {
+            console.log('User role:', user?.role);
             adminNav.style.display = 'none';
         }
     } else {
