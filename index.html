@@ -33,6 +33,7 @@
             <li><a href="#" onclick="switchPage('contact'); return false;" style="text-decoration: none; color: white;">Contact</a></li>
             <li id="profile-nav" style="display: none;"><a href="#" onclick="switchPage('profile'); return false;" style="text-decoration: none; color: white;">Profile</a></li>
             <li id="orders-nav" style="display: none;"><a href="#" onclick="switchPage('orders'); return false;" style="text-decoration: none; color: white;">My Orders</a></li>
+            <li id="admin-nav" style="display: none;"><a href="#" onclick="switchPage('admin'); return false;" style="text-decoration: none; color: #FFD700;">Admin</a></li>
         </ul>
     </nav>
     <hr>
@@ -176,6 +177,23 @@
                     <button type="submit" class="btn" style="background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px;">Submit</button>
                     <button type="reset" class="btn" style="background: #999; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; margin-left: 10px;">Reset</button>
                 </form>
+            </div>
+        </div>
+
+        <div id="page-admin" class="page" style="display: none;">
+            <h1>Admin Dashboard</h1>
+            <div style="margin-top: 30px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="border: 1px solid #ddd; padding: 20px; border-radius: 4px;">
+                        <h2>Manage Menu Items</h2>
+                        <button class="btn" onclick="showAddMenuForm()" style="background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; margin-top: 10px;">Add Menu Item</button>
+                        <div id="menu-management" style="margin-top: 20px;"></div>
+                    </div>
+                    <div style="border: 1px solid #ddd; padding: 20px; border-radius: 4px;">
+                        <h2>Manage Orders</h2>
+                        <div id="admin-orders" style="margin-top: 10px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 

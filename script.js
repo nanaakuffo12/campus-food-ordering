@@ -25,6 +25,8 @@ function switchPage(pageName) {
         loadOrderHistory();
     } else if (pageName === 'profile') {
         loadUserProfile();
+    } else if (pageName === 'admin') {
+        loadAdminDashboard();
     }
     
     window.scrollTo(0, 0);
@@ -136,7 +138,7 @@ function updateAuthUI() {
     const loginBtn = document.getElementById('login-btn');
     const profileNav = document.getElementById('profile-nav');
     const ordersNav = document.getElementById('orders-nav');
-    const logoutNav = document.getElementById('logout-nav');
+    const adminNav = document.getElementById('admin-nav');
     
     if (isAuthenticated()) {
         const token = getToken();
@@ -147,14 +149,19 @@ function updateAuthUI() {
         
         profileNav.style.display = 'block';
         ordersNav.style.display = 'block';
-        logoutNav.style.display = 'block';
+        
+        if (user?.role === 'admin') {
+            adminNav.style.display = 'block';
+        } else {
+            adminNav.style.display = 'none';
+        }
     } else {
         loginBtn.textContent = 'Login';
         loginBtn.style.background = '';
         
         profileNav.style.display = 'none';
         ordersNav.style.display = 'none';
-        logoutNav.style.display = 'none';
+        adminNav.style.display = 'none';
     }
 }
 
@@ -562,6 +569,109 @@ function handleContactSubmit(event) {
     event.preventDefault();
     showNotification('Thank you for contacting us! We will get back to you soon.', 'success');
     document.getElementById('contact-form').reset();
+}
+
+async function loadAdminDashboard() {
+    const token = getToken();
+    if (!token) {
+        switchPage('login');
+        return;
+    }
+    
+    const user = decodeToken(token);
+    if (user?.role !== 'admin') {
+        showNotification('Access denied. Admin only.', 'error');
+        return;
+    }
+    
+    loadAdminOrders();
+    loadAdminMenuItems();
+}
+
+async function loadAdminMenuItems() {
+    const menuDiv = document.getElementById('menu-management');
+    try {
+        const response = await fetch(`${API_URL}/menu`);
+        const data = await response.json();
+        
+        if (data.success && Array.isArray(data.data)) {
+            menuDiv.innerHTML = '<h3>Current Menu Items</h3>';
+            data.data.forEach(item => {
+                menuDiv.innerHTML += `
+                    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 4px;">
+                        <strong>${item.name}</strong> - ₵${item.price}<br>
+                        <small>${item.description}</small><br>
+                        <small style="color: #999;">Category: ${item.category}</small>
+                    </div>
+                `;
+            });
+        }
+    } catch (error) {
+        menuDiv.innerHTML = '<p style="color: red;">Error loading menu items</p>';
+    }
+}
+
+async function loadAdminOrders() {
+    const ordersDiv = document.getElementById('admin-orders');
+    const token = getToken();
+    
+    try {
+        const response = await fetch(`${API_URL}/orders`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        
+        if (data.success && Array.isArray(data.data)) {
+            ordersDiv.innerHTML = '<h3>All Orders</h3>';
+            data.data.forEach(order => {
+                const statusOptions = ['Pending', 'Preparing', 'Ready', 'Completed'];
+                const optionsHtml = statusOptions.map(status => 
+                    `<option value="${status}" ${order.status === status ? 'selected' : ''}>${status}</option>`
+                ).join('');
+                
+                ordersDiv.innerHTML += `
+                    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 4px; background: #f9f9f9;">
+                        <strong>Order #${order.id}</strong> - ${order.userEmail || 'Customer'}<br>
+                        Status: <select onchange="updateOrderStatus(${order.id}, this.value)" style="padding: 4px;">
+                            ${optionsHtml}
+                        </select><br>
+                        Total: ₵${order.totalPrice}
+                    </div>
+                `;
+            });
+        } else {
+            ordersDiv.innerHTML = '<p>No orders found</p>';
+        }
+    } catch (error) {
+        ordersDiv.innerHTML = '<p style="color: red;">Error loading orders</p>';
+    }
+}
+
+async function updateOrderStatus(orderId, newStatus) {
+    const token = getToken();
+    try {
+        const response = await fetch(`${API_URL}/orders/${orderId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ status: newStatus })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            showNotification('Order status updated', 'success');
+        } else {
+            showNotification('Error updating order', 'error');
+        }
+    } catch (error) {
+        showNotification('Error updating order', 'error');
+    }
+}
+
+function showAddMenuForm() {
+    alert('Add menu item feature - implement form as needed');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
