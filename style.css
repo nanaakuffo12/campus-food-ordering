@@ -1,41 +1,22 @@
-/* ========================================
-   CAMPUS FOOD ORDERING SYSTEM - STYLESHEET
-   Warm, Inviting Color Palette
-   ======================================== */
-
-/* ========================================
-   CSS VARIABLES - COLOR PALETTE
-   ======================================== */
 :root {
-  /* Warm Primary Colors */
-  --primary-warm: #D4753A;        /* Warm orange-brown */
-  --primary-light: #E8A87C;       /* Light terracotta */
-  --primary-dark: #A85428;        /* Dark burnt orange */
-  
-  /* Complementary Warm Tones */
-  --accent-gold: #D4A574;         /* Warm gold */
-  --accent-cream: #FFF5EB;        /* Warm cream */
-  
-  /* Neutral Palette */
-  --text-dark: #2C1810;           /* Deep warm brown */
-  --text-light: #FFFFFF;          /* White */
-  --bg-light: #FEF9F5;            /* Off-white warm */
-  --bg-gray: #F5E6D3;             /* Warm beige */
-  
-  /* Status Colors */
-  --success: #6B8E23;             /* Olive green */
-  --danger: #C44536;              /* Warm red */
-  --warning: #E8A333;             /* Warm amber */
-  --info: #5B7A8C;                /* Slate blue */
-  
-  /* Spacing */
+  --primary-warm: #D4753A;
+  --primary-light: #E8A87C;
+  --primary-dark: #A85428;
+  --accent-gold: #D4A574;
+  --accent-cream: #FFF5EB;
+  --text-dark: #2C1810;
+  --text-light: #FFFFFF;
+  --bg-light: #FEF9F5;
+  --bg-gray: #F5E6D3;
+  --success: #6B8E23;
+  --danger: #C44536;
+  --warning: #E8A333;
+  --info: #5B7A8C;
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
-  
-  /* Typography */
   --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --font-mono: 'Ubuntu Mono', monospace;
   --font-size-base: 16px;
@@ -43,20 +24,14 @@
   --font-size-md: 18px;
   --font-size-lg: 24px;
   --font-size-xl: 32px;
-  
-  /* Border Radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-full: 50px;
-  
-  /* Shadows */
   --shadow-sm: 0 2px 4px rgba(44, 24, 16, 0.1);
   --shadow-md: 0 4px 8px rgba(44, 24, 16, 0.15);
   --shadow-lg: 0 8px 16px rgba(44, 24, 16, 0.2);
   --shadow-xl: 0 12px 24px rgba(44, 24, 16, 0.25);
-  
-  /* Transitions */
   --transition: all 0.3s ease;
 }
 

@@ -344,7 +344,6 @@ function removeFromCart(index) {
     showNotification('Item removed', 'info');
 }
 
-// ========== CHECKOUT FUNCTIONALITY ==========
 function loadCheckout() {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const checkoutItemsDiv = document.getElementById('checkout-items');

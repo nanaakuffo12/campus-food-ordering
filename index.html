@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
     <header style="display:flex; align-items:center; justify-content:space-between; padding: 15px 20px;">
         <div id="brand" style="display:flex; flex-direction:column;">
             <h1 id="top" style="margin: 0; font-size: 24px;">Online</h1>
@@ -26,7 +25,6 @@
     </header>
     <hr>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <ul id="navcontent" style="list-style: none; display: flex; gap: 20px; padding: 0 20px; margin: 0;">
             <li><a href="#" onclick="switchPage('home'); return false;" style="text-decoration: none; color: white;">Home</a></li>
@@ -39,10 +37,8 @@
     </nav>
     <hr>
 
-    <!-- Main Content Area -->
     <div id="app" style="max-width: 1200px; margin: 20px auto; padding: 20px;">
 
-        <!-- HOME PAGE -->
         <div id="page-home" class="page" style="display: block;">
             <div style="text-align: center; padding: 40px 20px;">
                 <h1>Welcome to Online FoodShop</h1>
@@ -69,34 +65,27 @@
             </div>
         </div>
 
-        <!-- MENU PAGE -->
         <div id="page-menu" class="page" style="display: none;">
             <h1>Our Menu</h1>
             <div id="menu-items" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
-                <!-- Menu items loaded here -->
             </div>
         </div>
-
-        <!-- CART PAGE -->
         <div id="page-cart" class="page" style="display: none;">
             <h1>Your Shopping Cart</h1>
             <div id="cart-items" style="margin-top: 20px;">
-                <!-- Cart items loaded here -->
             </div>
-            <div style="margin-top: 30px; display: none;" id="checkout-section">
+            <div style="margin-top: 30px;" id="checkout-section">
                 <button class="btn" onclick="switchPage('checkout')" style="background: #4CAF50; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px;">Proceed to Checkout</button>
                 <button class="btn" onclick="switchPage('menu')" style="background: #D4753A; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px; margin-left: 10px;">Continue Shopping</button>
             </div>
         </div>
 
-        <!-- CHECKOUT PAGE -->
         <div id="page-checkout" class="page" style="display: none;">
             <h1>Checkout</h1>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
                 <div>
                     <h2>Order Summary</h2>
                     <div id="checkout-items" style="border: 1px solid #ddd; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
-                        <!-- Order items -->
                     </div>
                     <div style="border-top: 2px solid #333; padding-top: 15px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -116,12 +105,12 @@
                 </div>
             </div>
         </div>
-
-        <!-- ORDERS PAGE -->
         <div id="page-orders" class="page" style="display: none;">
             <h1>My Orders</h1>
             <div id="orders-container" style="margin-top: 20px;">
-                <!-- Orders loaded here -->
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn" onclick="switchPage('menu')" style="background: #4CAF50; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px;">Order Again</button>
             </div>
         </div>
 
@@ -129,11 +118,8 @@
         <div id="page-profile" class="page" style="display: none;">
             <h1>My Profile</h1>
             <div id="profile-container" style="margin-top: 20px;">
-                <!-- Profile loaded here -->
             </div>
         </div>
-
-        <!-- ABOUT PAGE -->
         <div id="page-about" class="page" style="display: none;">
             <h1>About Online FoodShop</h1>
             <div style="margin-top: 20px; max-width: 800px;">
@@ -157,7 +143,6 @@
             </div>
         </div>
 
-        <!-- CONTACT PAGE -->
         <div id="page-contact" class="page" style="display: none;">
             <h1>Contact Us</h1>
             <div style="max-width: 600px; margin-top: 20px;">
@@ -194,7 +179,6 @@
             </div>
         </div>
 
-        <!-- LOGIN PAGE -->
         <div id="page-login" class="page" style="display: none;">
             <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
                 <h1>Login</h1>
@@ -209,11 +193,10 @@
                     </div>
                     <button type="submit" class="btn" style="background: #2196F3; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px; width: 100%; font-size: 16px;">Login</button>
                 </form>
-                <p style="margin-top: 20px; text-align: center;">Don't have an account? <a href="#" onclick="switchPage('signup'); return false;" style="color: white;">Sign up here</a></p>
+                <p style="margin-top: 20px; text-align: center;">Don't have an account? <a href="#" onclick="switchPage('signup'); return false;" style="color: black;">Sign up here</a></p>
             </div>
         </div>
 
-        <!-- SIGNUP PAGE -->
         <div id="page-signup" class="page" style="display: none;">
             <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
                 <h1>Sign Up</h1>
