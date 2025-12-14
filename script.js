@@ -301,12 +301,16 @@ function loadCart() {
     });
 
     cartContainer.innerHTML += `
-        <div style="margin-top: 20px; border-top: 2px solid #333; padding-top: 15px;">
+        <div style="margin-top: 20px; border-top: 2px solid #333; padding-top: 15px; margin-bottom: 20px;">
             <h3>Total: <span id="cart-total-display">${formatCurrency(totalPrice)}</span></h3>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn" onclick="switchPage('checkout')" style="background: #4CAF50; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px;">Proceed to Checkout</button>
+            <button class="btn" onclick="switchPage('menu')" style="background: #D4753A; color: white; padding: 12px 24px; cursor: pointer; border: none; border-radius: 4px; font-size: 16px;">Continue Shopping</button>
         </div>
     `;
     
-    checkoutSection.style.display = 'block';
+    checkoutSection.style.display = 'none';
 }
 
 function updateCartQty(index, qty) {
