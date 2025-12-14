@@ -4,12 +4,6 @@
 
 The **Campus Food Ordering System** is a lightweight web-based platform designed for students to order meals from campus cafeterias. The system enables students to register, browse menu items, place orders, and track their order status in real-time. Administrators can manage menu items and update order statuses.
 
-**Course:** CS3139 - Web Technologies  
-**Lecturer:** Kimkpe Arnold Sylvian  
-**Academic Year:** 2025/2026 - Semester 1  
-**Question:** Question 3 - Campus Food Ordering System (60 Marks)
-
----
 
 ## 🚀 Deployment Links
 
